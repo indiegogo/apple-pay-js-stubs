@@ -1,0 +1,11 @@
+{
+  "name": "apple-pay-js-stubs",
+  "version": "1.0.0",
+  "description": "Stub / Fake implementation of the ApplePay JS framework to enable acceptance testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Indiegogo Inc.",
+  "license": "ISC"
+}
