@@ -44,10 +44,13 @@ class ApplePaySessionStub {
         );
     }
 
+    completePayment(status) {
+    }
+
     set onvalidatemerchant(value) {
         this._onvalidatemerchant = value;
     }
-};
+}
 
 window.ApplePaySession = ApplePaySessionStub;
 //export default ApplePaySessionStub;

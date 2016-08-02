@@ -71,4 +71,14 @@ describe('apple-pay-js-stubs', function() {
             expect(ApplePaySession.afterBeginAndValidation).to.be.null;
         });
     });
+
+    describe("completePayment(status)", function () {
+       it("has completePayment implementation", function () {
+          var session = new ApplePaySession(1, {});
+          session.completePayment(123);
+           expect(function() {
+               session.completePayment(123);
+           }).to.not.throw();
+       });
+    });
 });
