@@ -22,12 +22,12 @@ class ApplePaySessionStub {
         this._stubCanMakePaymentsWithActiveCard = value;
     }
 
-    static set afterBeginAndValidation(callback) {
-        this._afterBeginAndValidation = callback;
+    static set stubExecuteAfterMerchantValidation(callback) {
+        this._stubExecuteAfterMerchantValidation = callback;
     }
 
-    static get afterBeginAndValidation() {
-        return this._afterBeginAndValidation;
+    static get stubExecuteAfterMerchantValidation() {
+        return this._stubExecuteAfterMerchantValidation;
     }
 
     // Static Apple Pay JS interface
@@ -43,11 +43,11 @@ class ApplePaySessionStub {
     // Instance Apple Pay JS interface
 
     completeMerchantValidation(merchantSession) {
-        if (!ApplePaySession._afterBeginAndValidation) {
-            throw "Error: No post afterShowAndValidate actions defined";
+        if (!ApplePaySession.stubExecuteAfterMerchantValidation) {
+            throw "Error: No stubExecuteAfterMerchantValidation() callback set";
         }
-        ApplePaySession.afterBeginAndValidation(this);
-        ApplePaySession.afterBeginAndValidation = null;
+        ApplePaySession.stubExecuteAfterMerchantValidation(this);
+        ApplePaySession.stubExecuteAfterMerchantValidation = null;
     }
 
     begin() {
