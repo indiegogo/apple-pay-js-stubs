@@ -1,0 +1,10 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    pivotal_git_scripts (1.4.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  pivotal_git_scripts

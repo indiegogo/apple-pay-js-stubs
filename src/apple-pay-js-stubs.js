@@ -16,6 +16,10 @@ class ApplePaySessionStub {
         return Promise.resolve(this.mockCanMakePaymentsWithActiveCard);
     }
 
+    completeMerchantValidation(merchantSession) {
+        throw "Error: No post afterShowAndValidate actions defined";
+    }
+
     begin() {
         this._onvalidatemerchant(
             {validationURL: 'https://apple-pay-gateway-cert.apple.com/paymentservices/startSession'}

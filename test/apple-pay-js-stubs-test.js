@@ -33,4 +33,20 @@ describe('apple-pay-js-stubs', function() {
             expect(theEvent.validationURL).to.equal('https://apple-pay-gateway-cert.apple.com/paymentservices/startSession');
         });
     });
+
+    describe("completeMerchantValidation()", function() {
+        var session;
+        beforeEach(function () {
+            session = new ApplePaySession(1, {});
+            session.onvalidatemerchant = function(event) {
+                session.completeMerchantValidation({});
+            };
+        });
+
+        it('throws exception when no afterBeginAndValidation callback is set when completeMerchantValidation is called', function () {
+            expect(function() {
+                session.begin();
+            }).to.throw("Error: No post afterShowAndValidate actions defined");
+        });
+    });
 });

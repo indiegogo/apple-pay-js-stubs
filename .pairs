@@ -1,0 +1,10 @@
+# .pairs - configuration for 'git pair'
+# to see current pairing status, try 'git about'
+pairs:
+  # <initials>: <Firstname> <Lastname>[; <email-id>]
+  gt: Glen Tregoning; glen.tregoning
+  jn: Julia Nguyen; julia.nguyen
+email:
+  prefix: pair
+  domain: indiegogo.com
+  no_solo_prefix: true
