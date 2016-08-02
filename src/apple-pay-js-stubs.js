@@ -40,7 +40,19 @@ class ApplePaySessionStub {
         return Promise.resolve(this.stubCanMakePaymentsWithActiveCard);
     }
 
+    static supportsVersion(version) {
+        return true;
+    }
+
     // Instance Apple Pay JS interface
+
+    abort() {}
+
+    begin() {
+        this._onvalidatemerchant(
+            {validationURL: 'https://apple-pay-gateway-cert.apple.com/paymentservices/startSession'}
+        );
+    }
 
     completeMerchantValidation(merchantSession) {
         if (!ApplePaySession.stubExecuteAfterMerchantValidation) {
@@ -50,16 +62,13 @@ class ApplePaySessionStub {
         ApplePaySession.stubExecuteAfterMerchantValidation = null;
     }
 
-    begin() {
-        this._onvalidatemerchant(
-            {validationURL: 'https://apple-pay-gateway-cert.apple.com/paymentservices/startSession'}
-        );
-    }
+    completePayment(status) { }
 
-    abort() {}
+    completePaymentMethodSelection(newTotal, newLineItems) { }
 
-    completePayment(status) {
-    }
+    completeShippingContactSelection(status, newShippingMethods, newTotal, newLineItems) { }
+
+    completeShippingMethodSelection(status, newTotal, newLineItems) { }
 
     set onvalidatemerchant(value) {
         this._onvalidatemerchant = value;

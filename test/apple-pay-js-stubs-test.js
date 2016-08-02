@@ -22,15 +22,9 @@ describe('apple-pay-js-stubs', function() {
         });
     });
 
-    describe('begin()', function () {
-        it('calls session.onvalidatemerchant() with expected validationURL', function () {
-            var session = new ApplePaySession(1, {});
-            var theEvent;
-            session.onvalidatemerchant = function(event) {
-                theEvent = event;
-            };
-            session.begin();
-            expect(theEvent.validationURL).to.equal('https://apple-pay-gateway-cert.apple.com/paymentservices/startSession');
+    describe("supportsVersion(version)", function () {
+        it("returns true", function () {
+            expect(ApplePaySession.supportsVersion(123)).to.be.true;
         });
     });
 
@@ -43,12 +37,15 @@ describe('apple-pay-js-stubs', function() {
         });
     });
 
-    describe("completePayment(status)", function () {
-        it("has implementation", function () {
+    describe('begin()', function () {
+        it('calls session.onvalidatemerchant() with expected validationURL', function () {
             var session = new ApplePaySession(1, {});
-            expect(function() {
-                session.completePayment(123);
-            }).to.not.throw();
+            var theEvent;
+            session.onvalidatemerchant = function(event) {
+                theEvent = event;
+            };
+            session.begin();
+            expect(theEvent.validationURL).to.equal('https://apple-pay-gateway-cert.apple.com/paymentservices/startSession');
         });
     });
 
@@ -99,6 +96,51 @@ describe('apple-pay-js-stubs', function() {
             };
             session.completeMerchantValidation({});
             expect(ApplePaySession.stubExecuteAfterMerchantValidation).to.be.null;
+        });
+    });
+
+    describe("completePayment(status)", function () {
+        it("has implementation", function () {
+            var session = new ApplePaySession(1, {});
+            expect(function() {
+                session.completePayment(123);
+            }).to.not.throw();
+        });
+    });
+
+    describe("completePaymentMethodSelection(newTotal, newLineItems)", function() {
+        it("has implementation", function () {
+            var session = new ApplePaySession(1, {});
+            var newTotal = {};
+            var newLineItems = [];
+            expect(function() {
+                session.completePaymentMethodSelection(newTotal, newLineItems);
+            }).to.not.throw();
+        });
+    });
+
+    describe("completeShippingContactSelection(status, newShippingMethods, newTotal, newLineItems)", function() {
+        it("has implementation", function () {
+            var session = new ApplePaySession(1, {});
+            var newShippingMethods = [];
+            var status = 123;
+            var newTotal = {};
+            var newLineItems = [];
+            expect(function() {
+                session.completeShippingContactSelection(status, newShippingMethods, newTotal, newLineItems);
+            }).to.not.throw();
+        });
+    });
+
+    describe("completeShippingMethodSelection(status, newTotal, newLineItems)", function() {
+        it("has implementation", function () {
+            var session = new ApplePaySession(1, {});
+            var status = 123;
+            var newTotal = {};
+            var newLineItems = [];
+            expect(function() {
+                session.completeShippingMethodSelection(status, newTotal, newLineItems);
+            }).to.not.throw();
         });
     });
 });
