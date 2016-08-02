@@ -1,18 +1,29 @@
 class ApplePaySessionStub {
-    constructor(version, request) {
+    constructor(version, paymentRequest) {
         this.version = version;
-        this.request = request;
+        this.request = paymentRequest;
     }
 
-    //var mockCanMakePaymentsWithActiveCard;
-    get mockCanMakePaymentsWithActiveCard() {
-        return this.mockCanMakePaymentsWithActiveCard;
+    static get mockCanMakePaymentsWithActiveCard() {
+        return this._mockCanMakePaymentsWithActiveCard;
     }
-    set mockCanMakePaymentsWithActiveCard(value) {
-        this.mockCanMakePaymentsWithActiveCard = value;
+
+    static set mockCanMakePaymentsWithActiveCard(value) {
+        this._mockCanMakePaymentsWithActiveCard = value;
     }
+
     static canMakePaymentsWithActiveCard(merchantIdentifier) {
         return Promise.resolve(this.mockCanMakePaymentsWithActiveCard);
+    }
+
+    begin() {
+        this._onvalidatemerchant(
+            {validationURL: 'https://apple-pay-gateway-cert.apple.com/paymentservices/startSession'}
+        );
+    }
+
+    set onvalidatemerchant(value) {
+        this._onvalidatemerchant = value;
     }
 };
 
