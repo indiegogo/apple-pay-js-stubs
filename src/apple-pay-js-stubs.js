@@ -18,6 +18,10 @@ class ApplePaySessionStub {
         this._afterBeginAndValidation = callback;
     }
 
+    static get afterBeginAndValidation() {
+        return this._afterBeginAndValidation;
+    }
+
     // Static Apple Pay JS interface
 
     static canMakePaymentsWithActiveCard(merchantIdentifier) {
@@ -30,6 +34,8 @@ class ApplePaySessionStub {
         if (!ApplePaySession._afterBeginAndValidation) {
             throw "Error: No post afterShowAndValidate actions defined";
         }
+        ApplePaySession.afterBeginAndValidation(this);
+        ApplePaySession.afterBeginAndValidation = null;
     }
 
     begin() {

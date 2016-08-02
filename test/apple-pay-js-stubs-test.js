@@ -40,17 +40,35 @@ describe('apple-pay-js-stubs', function() {
             session = new ApplePaySession(1, {});
         });
 
-        it('throws exception when no afterBeginAndValidation callback is set when completeMerchantValidation is called', function () {
+        it('throws exception when no ApplePaySession.afterBeginAndValidation() callback is set when completeMerchantValidation is called', function () {
             expect(function() {
                 session.completeMerchantValidation({});
             }).to.throw("Error: No post afterShowAndValidate actions defined");
         });
 
-        it('does not throw an exception when afterBeginAndValidation callback is set when completeMerchantValidation is called', function () {
+        it('does not throw an exception when ApplePaySession.afterBeginAndValidation() callback is set when completeMerchantValidation is called', function () {
             ApplePaySession.afterBeginAndValidation = function() {};
             expect(function() {
                 session.completeMerchantValidation({});
             }).to.not.throw();
+        });
+
+        it('calls afterBeginAndValidation with session when completeMerchantValidation is called', function() {
+            var calledWithSession;
+            ApplePaySession.afterBeginAndValidation = function(session) {
+                calledWithSession = session;
+            };
+            session.completeMerchantValidation({});
+            expect(calledWithSession).to.eq(session);
+        });
+
+        it('clears afterBeginAndValidation after completeMerchantValidation is called', function() {
+            var calledWithSession;
+            ApplePaySession.afterBeginAndValidation = function(session) {
+                calledWithSession = session;
+            };
+            session.completeMerchantValidation({});
+            expect(ApplePaySession.afterBeginAndValidation).to.be.null;
         });
     });
 });
