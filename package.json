@@ -19,5 +19,9 @@
     "karma-sinon": "^1.0.5",
     "mocha": "^3.0.0",
     "sinon": "^1.17.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:indiegogo/apple-pay-js-stubs.git"
   }
 }
