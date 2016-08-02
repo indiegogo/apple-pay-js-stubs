@@ -6,20 +6,20 @@ class ApplePaySessionStub {
 
     // Static Stub configuration
 
-    static get configCanMakePayments() {
-        return this._configCanMakePayments;
+    static get stubCanMakePayments() {
+        return this._stubCanMakePayments;
     }
 
-    static set configCanMakePayments(value) {
-        this._configCanMakePayments = value;
+    static set stubCanMakePayments(value) {
+        this._stubCanMakePayments = value;
     }
 
-    static get configCanMakePaymentsWithActiveCard() {
-        return this._configCanMakePaymentsWithActiveCard;
+    static get stubCanMakePaymentsWithActiveCard() {
+        return this._stubCanMakePaymentsWithActiveCard;
     }
 
-    static set configCanMakePaymentsWithActiveCard(value) {
-        this._configCanMakePaymentsWithActiveCard = value;
+    static set stubCanMakePaymentsWithActiveCard(value) {
+        this._stubCanMakePaymentsWithActiveCard = value;
     }
 
     static set afterBeginAndValidation(callback) {
@@ -33,11 +33,11 @@ class ApplePaySessionStub {
     // Static Apple Pay JS interface
 
     static canMakePayments() {
-        return this._configCanMakePayments;
+        return this._stubCanMakePayments;
     }
 
     static canMakePaymentsWithActiveCard(merchantIdentifier) {
-        return Promise.resolve(this.mockCanMakePaymentsWithActiveCard);
+        return Promise.resolve(this.stubCanMakePaymentsWithActiveCard);
     }
 
     // Instance Apple Pay JS interface

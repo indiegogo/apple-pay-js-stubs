@@ -14,10 +14,10 @@ describe('apple-pay-js-stubs', function() {
 
     describe('static canMakePaymentsWithActiveCard()', function () {
         it('returns fulfilled promise with the configured mockCanMakePaymentsWithActiveCard value', function () {
-            ApplePaySession.configCanMakePaymentsWithActiveCard = false;
+            ApplePaySession.stubCanMakePaymentsWithActiveCard = false;
             ApplePaySession.canMakePaymentsWithActiveCard("com.fake.merchant.identifier").should.eventually.equal(false);
 
-            ApplePaySession.configCanMakePaymentsWithActiveCard  = true;
+            ApplePaySession.stubCanMakePaymentsWithActiveCard  = true;
             ApplePaySession.canMakePaymentsWithActiveCard("com.fake.merchant.identifier").should.eventually.equal(true);
         });
     });
@@ -54,12 +54,12 @@ describe('apple-pay-js-stubs', function() {
 
     describe("canMakePayments()", function () {
         it("has implementation that returns true", function () {
-            ApplePaySession.configCanMakePayments = true;
+            ApplePaySession.stubCanMakePayments = true;
             expect(ApplePaySession.canMakePayments()).to.be.true;
         });
 
         it("has implementation that returns false", function () {
-            ApplePaySession.configCanMakePayments = false;
+            ApplePaySession.stubCanMakePayments = false;
             expect(ApplePaySession.canMakePayments()).to.be.false;
         });
     });
