@@ -38,15 +38,19 @@ describe('apple-pay-js-stubs', function() {
         var session;
         beforeEach(function () {
             session = new ApplePaySession(1, {});
-            session.onvalidatemerchant = function(event) {
-                session.completeMerchantValidation({});
-            };
         });
 
         it('throws exception when no afterBeginAndValidation callback is set when completeMerchantValidation is called', function () {
             expect(function() {
-                session.begin();
+                session.completeMerchantValidation({});
             }).to.throw("Error: No post afterShowAndValidate actions defined");
+        });
+
+        it('does not throw an exception when afterBeginAndValidation callback is set when completeMerchantValidation is called', function () {
+            ApplePaySession.afterBeginAndValidation = function() {};
+            expect(function() {
+                session.completeMerchantValidation({});
+            }).to.not.throw();
         });
     });
 });

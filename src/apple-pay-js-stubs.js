@@ -4,6 +4,8 @@ class ApplePaySessionStub {
         this.request = paymentRequest;
     }
 
+    // Static Stub configuration
+
     static get mockCanMakePaymentsWithActiveCard() {
         return this._mockCanMakePaymentsWithActiveCard;
     }
@@ -12,12 +14,22 @@ class ApplePaySessionStub {
         this._mockCanMakePaymentsWithActiveCard = value;
     }
 
+    static set afterBeginAndValidation(callback) {
+        this._afterBeginAndValidation = callback;
+    }
+
+    // Static Apple Pay JS interface
+
     static canMakePaymentsWithActiveCard(merchantIdentifier) {
         return Promise.resolve(this.mockCanMakePaymentsWithActiveCard);
     }
 
+    // Instance Apple Pay JS interface
+
     completeMerchantValidation(merchantSession) {
-        throw "Error: No post afterShowAndValidate actions defined";
+        if (!ApplePaySession._afterBeginAndValidation) {
+            throw "Error: No post afterShowAndValidate actions defined";
+        }
     }
 
     begin() {
