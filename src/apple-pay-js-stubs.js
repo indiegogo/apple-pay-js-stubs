@@ -6,12 +6,20 @@ class ApplePaySessionStub {
 
     // Static Stub configuration
 
-    static get mockCanMakePaymentsWithActiveCard() {
-        return this._mockCanMakePaymentsWithActiveCard;
+    static get configCanMakePayments() {
+        return this._configCanMakePayments;
     }
 
-    static set mockCanMakePaymentsWithActiveCard(value) {
-        this._mockCanMakePaymentsWithActiveCard = value;
+    static set configCanMakePayments(value) {
+        this._configCanMakePayments = value;
+    }
+
+    static get configCanMakePaymentsWithActiveCard() {
+        return this._configCanMakePaymentsWithActiveCard;
+    }
+
+    static set configCanMakePaymentsWithActiveCard(value) {
+        this._configCanMakePaymentsWithActiveCard = value;
     }
 
     static set afterBeginAndValidation(callback) {
@@ -23,6 +31,10 @@ class ApplePaySessionStub {
     }
 
     // Static Apple Pay JS interface
+
+    static canMakePayments() {
+        return this._configCanMakePayments;
+    }
 
     static canMakePaymentsWithActiveCard(merchantIdentifier) {
         return Promise.resolve(this.mockCanMakePaymentsWithActiveCard);
@@ -43,6 +55,8 @@ class ApplePaySessionStub {
             {validationURL: 'https://apple-pay-gateway-cert.apple.com/paymentservices/startSession'}
         );
     }
+
+    abort() {}
 
     completePayment(status) {
     }

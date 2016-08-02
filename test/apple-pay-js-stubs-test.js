@@ -14,10 +14,10 @@ describe('apple-pay-js-stubs', function() {
 
     describe('static canMakePaymentsWithActiveCard()', function () {
         it('returns fulfilled promise with the configured mockCanMakePaymentsWithActiveCard value', function () {
-            ApplePaySession.mockCanMakePaymentsWithActiveCard = false;
+            ApplePaySession.configCanMakePaymentsWithActiveCard = false;
             ApplePaySession.canMakePaymentsWithActiveCard("com.fake.merchant.identifier").should.eventually.equal(false);
 
-            ApplePaySession.mockCanMakePaymentsWithActiveCard = true;
+            ApplePaySession.configCanMakePaymentsWithActiveCard  = true;
             ApplePaySession.canMakePaymentsWithActiveCard("com.fake.merchant.identifier").should.eventually.equal(true);
         });
     });
@@ -31,6 +31,36 @@ describe('apple-pay-js-stubs', function() {
             };
             session.begin();
             expect(theEvent.validationURL).to.equal('https://apple-pay-gateway-cert.apple.com/paymentservices/startSession');
+        });
+    });
+
+    describe("abort()", function () {
+        it("has implementation", function () {
+            var session = new ApplePaySession(1, {});
+            expect(function() {
+                session.abort();
+            }).to.not.throw();
+        });
+    });
+
+    describe("completePayment(status)", function () {
+        it("has implementation", function () {
+            var session = new ApplePaySession(1, {});
+            expect(function() {
+                session.completePayment(123);
+            }).to.not.throw();
+        });
+    });
+
+    describe("canMakePayments()", function () {
+        it("has implementation that returns true", function () {
+            ApplePaySession.configCanMakePayments = true;
+            expect(ApplePaySession.canMakePayments()).to.be.true;
+        });
+
+        it("has implementation that returns false", function () {
+            ApplePaySession.configCanMakePayments = false;
+            expect(ApplePaySession.canMakePayments()).to.be.false;
         });
     });
 
@@ -70,15 +100,5 @@ describe('apple-pay-js-stubs', function() {
             session.completeMerchantValidation({});
             expect(ApplePaySession.afterBeginAndValidation).to.be.null;
         });
-    });
-
-    describe("completePayment(status)", function () {
-       it("has completePayment implementation", function () {
-          var session = new ApplePaySession(1, {});
-          session.completePayment(123);
-           expect(function() {
-               session.completePayment(123);
-           }).to.not.throw();
-       });
     });
 });
