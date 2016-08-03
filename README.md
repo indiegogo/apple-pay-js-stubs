@@ -88,7 +88,13 @@ ApplePaySession.stubExecuteAfterMerchantValidation = function (session) {
 ```
 
 
+# apple-pay-js-stubs Demo / Example 
 
+You can see an example web page which demonstrates some of the capabilities of the stubs in [/example/index.html](/example/index.html).
+
+A few things to note:
+* To get the demo to load, you'll need to clone the repository locally then open example/index.html in the Chrome browser.
+* This demonstrates the stubs through an interactive 'Console'. Typically usage will be driven from your acceptance tests instead of interactively. 
 
 
 ## Code of Conduct

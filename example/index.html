@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>apple-pay-js-stubs Example</title>
+        <style>
+            button {
+                height: 30px;
+                min-width: 45px;
+                margin: 2px;
+            }
+
+            .no-apple-pay {
+                border: 1px dashed grey;
+                background-color: white;
+            }
+
+            #interactions {
+                border: 1px solid grey;
+                min-height: 100px;
+                color: green;
+            }
+
+            .error {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>Amazing Product</h1>
+        <p>This is a product you'd definitely pay $10 for.</p>
+        <p>Price: $10</p>
+        <button class="no-apple-pay">...</button>
+        <button class="apple-pay" style="display: none;">&#x1f34e; Pay</button>
+        <hr/>
+        <h2>apple-pay-js-stubs Example Console</h2>
+        <button id="enable-stubbing">Load apple-pay-js-stubs</button>
+        <h3>Configure apple-pay-js-stubs</h3>
+        <ul>
+            <li>
+                <button id="stub-config-cancel" class="stub-config">User Cancel Payment</button>
+            </li>
+            <li>
+                <button id="stub-config-shipping-authorize" class="stub-config">User selects shipping address then authorizes payment</button>
+            </li>
+        </ul>
+        <h3>Log of Stubbed Behaviour</h3>
+        <div id="interactions"></div>
+        <hr/>
+
+        <h2>Instructions</h2>
+        <p>
+            Initially this page is loaded without apple-pay-js-stubs loaded.
+            To try out apple-pay-js-stubs you can control the stub behaviour using the Example Console above.
+            <br/><br/>
+            You can enable stubbing for a given configuration by:
+            <ol>
+                <li>Clicking 'Load apple-pay-js-stubs'</li>
+                <li>Clicking your preferred configuration option</li>
+                <li>then click the '&#x1f34e; Pay'</li>
+            </ol>
+            The 'Log of Stubbed Behaviour' outputs the stubbed user behaviour as a result of your clck on the '&#x1f34e; Pay' button.<br/>
+            Note: after every '&#x1f34e; Pay' press the stub behaviour will be cleared. So please reselect another option between presses.
+        </p>
+
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="example-support.js"></script>
+        <script src="payment.js"></script>
+        <script src="stub-configuration.js"></script>
+    </body>
+</html>
