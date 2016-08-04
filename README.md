@@ -20,7 +20,7 @@ npm install apple-pay-js-stubs
 
 ### Option b: Manually by downloading
 
-Alternatively you can download the apple-pay-js-stubs.js file here: (https://github.com/indiegogo/apple-pay-js-stubs/blob/master/src/apple-pay-js-stubs.js)[apple-pay-js-stubs.js]
+Alternatively you can download the [apple-pay-js-stubs.js file here](https://github.com/indiegogo/apple-pay-js-stubs/blob/master/src/apple-pay-js-stubs.js)
  
 ## Step 2: Load Javascript file in your acceptance tests
 
