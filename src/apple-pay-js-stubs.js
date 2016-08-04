@@ -76,4 +76,3 @@ class ApplePaySessionStub {
 }
 
 window.ApplePaySession = ApplePaySessionStub;
-//export default ApplePaySessionStub;
