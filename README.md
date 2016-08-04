@@ -24,7 +24,7 @@ Alternatively you can download the [apple-pay-js-stubs.js file here](https://git
  
 ## Step 2: Load Javascript file in your acceptance tests
 
-In order for apple-pay-js-stubs.js to be available when your acceptance tests run, you'll need to load javascript file on the page in your website which normally interacts with the window.ApplePaySession object. 
+In order for apple-pay-js-stubs.js to be available when your acceptance tests run, you'll need to load the javascript file on the page in your website which normally interacts with the window.ApplePaySession object. 
 
 **Note: You should only do this when you're running your automated acceptance tests to avoid conflicting with Safari in your production environment**
 
@@ -42,11 +42,11 @@ page.execute_script(javascript)
 ```
 (where `/assets/test_support/` is the path on your website to the apple-pay-js-stubs.js file)
 
-Note: This approach will result in a delay in `window.ApplePaySession` which may not be the same as on the real device.
+Note: This approach will result in a delay in `window.ApplePaySession` being available which may not be the same as on the real ApplePay supporting browser.
 
 ## Step 3: Configure the Stubs for your current test 
 
-For each specific test utilizing ApplePay and the apple-pay-js-stubs, before executing your tests you need to configure the ApplePaySessionStubs class(stored in window.ApplePaySession) so that it performs the appropriate call backs to simulate the users, and ApplePay JS's normal behaviour for a specific scenario. 
+Each test using ApplePay/apple-pay-js-stubs, will need to configure the ApplePaySessionStubs class (stored in window.ApplePaySession) before executing the test. This is how you configure the call backs to simulate the users, and ApplePay JS's normal behaviour for a specific scenario. 
 
 You can configure this by running the following javascript code on you page before each test: 
 
