@@ -1,6 +1,8 @@
 # apple-pay-js-stubs
 The Apple Pay JS Stubs provide a stubbed implementation of the ApplePay JS framework allowing you to acceptance test your Apple Pay for the Web code without requiring Safari, or an iPhone with iOS 10
 
+[![Build Status](https://travis-ci.org/indiegogo/apple-pay-js-stubs.svg?branch=master)](https://travis-ci.org/indiegogo/apple-pay-js-stubs)
+
 This stubbed implementation substitutes the ApplePay JS API normally provided by the Safari browser on iOS 10, and macOS Sierra with a stubbed javascript implementation. 
 
 Unlike the offical API, apple-pay-js-stubs presents no paysheet or other visual feedback when called, instead it can be configured to executes the ApplePay JS callbacks based the test scenario pre-configured by *you* the developer. 
