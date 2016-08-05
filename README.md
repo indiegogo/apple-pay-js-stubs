@@ -10,7 +10,11 @@ Unlike the offical API, apple-pay-js-stubs presents no paysheet or other visual 
 This approach allows you to simulate both the ApplePay paysheet and user behaviour quickly and easily without requiring a physical ApplePay capable device.
 
 # Requirements 
-- ECMAScript 6 complient browser (tested in Chrome)
+- ECMAScript 6 complient browser 
+  - Tested in: 
+    - Chrome 51.0.2704.103 (64-bit)
+    - Firefox 48.0 
+    - Safari Version 9.1 (11601.5.17.1)
 
 # Installation and Usage 
 
