@@ -1,6 +1,6 @@
 {
   "name": "apple-pay-js-stubs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The Apple Pay JS Stubs provide a stubbed implementation of the ApplePay JS framework allowing you to acceptance test your Apple Pay for the Web code without requiring Safari, or an iPhone with iOS 10",
   "main": "src/apple-pay-js-stubs.js",
   "scripts": {
