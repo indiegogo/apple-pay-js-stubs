@@ -12,23 +12,11 @@ class Emitter {
     }
 }
 
-class ApplePayPaymentAuthorizedEvent extends Event {
-    constructor(payment) {
-      super("paymentauthorized");
-      this._payment = payment;
-    }
-
-    get payment() {
-      return this._payment;
-    }
-}
-window.ApplePayPaymentAuthorizedEvent = ApplePayPaymentAuthorizedEvent;
-
 class ApplePaySessionStub extends Emitter {
     constructor(version, paymentRequest) {
         super();
         this.version = version;
-        this.request = paymentRequest;
+        this._request = paymentRequest;
     }
 
     // Static Stub configuration
@@ -76,13 +64,14 @@ class ApplePaySessionStub extends Emitter {
     abort() {}
 
     begin() {
+        let url = 'https://apple-pay-gateway-cert.apple.com/paymentservices/startSession';
         if (this._onvalidatemerchant) {
             this._onvalidatemerchant(
-                {validationURL: 'https://apple-pay-gateway-cert.apple.com/paymentservices/startSession'}
+                {validationURL: url}
             );
-        } else {
-            this.completeMerchantValidation();
         }
+        var event = new ApplePayValidateMerchantEvent(url);
+        this.dispatchEvent(event);
     }
 
     completeMerchantValidation(merchantSession) {
@@ -90,7 +79,6 @@ class ApplePaySessionStub extends Emitter {
             throw "Error: No stubExecuteAfterMerchantValidation() callback set";
         }
         ApplePaySession.stubExecuteAfterMerchantValidation(this);
-        ApplePaySession.stubExecuteAfterMerchantValidation = null;
     }
 
     completePayment(status) { }
@@ -104,6 +92,37 @@ class ApplePaySessionStub extends Emitter {
     set onvalidatemerchant(value) {
         this._onvalidatemerchant = value;
     }
+
+    // Stub helper methods
+
+    get request() {
+        return this._request;
+    }
+
 }
 
 window.ApplePaySession = ApplePaySessionStub;
+
+class ApplePayPaymentAuthorizedEvent extends Event {
+    constructor(payment) {
+        super("paymentauthorized");
+        this._payment = payment;
+    }
+
+    get payment() {
+        return this._payment;
+    }
+}
+window.ApplePayPaymentAuthorizedEvent = ApplePayPaymentAuthorizedEvent;
+
+class ApplePayValidateMerchantEvent extends Event {
+    constructor(validationURL) {
+        super("validatemerchant");
+        this._validationURL = validationURL;
+    }
+
+    get validationURL() {
+        return this._validationURL;
+    }
+}
+window.ApplePayValidateMerchantEvent = ApplePayValidateMerchantEvent;
