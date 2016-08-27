@@ -1,5 +1,32 @@
-class ApplePaySessionStub {
+// Based on solution by naomik here http://stackoverflow.com/a/24216547
+class Emitter {
+    constructor() {
+      var delegate = document.createDocumentFragment();
+      [
+        'addEventListener',
+        'dispatchEvent',
+        'removeEventListener'
+      ].forEach(f =>
+        this[f] = (...xs) => delegate[f](...xs)
+      )
+    }
+}
+
+class ApplePayPaymentAuthorizedEvent extends Event {
+    constructor(payment) {
+      super("paymentauthorized");
+      this._payment = payment;
+    }
+
+    get payment() {
+      return this._payment;
+    }
+}
+window.ApplePayPaymentAuthorizedEvent = ApplePayPaymentAuthorizedEvent;
+
+class ApplePaySessionStub extends Emitter {
     constructor(version, paymentRequest) {
+        super();
         this.version = version;
         this.request = paymentRequest;
     }
@@ -49,9 +76,13 @@ class ApplePaySessionStub {
     abort() {}
 
     begin() {
-        this._onvalidatemerchant(
-            {validationURL: 'https://apple-pay-gateway-cert.apple.com/paymentservices/startSession'}
-        );
+        if (this._onvalidatemerchant) {
+            this._onvalidatemerchant(
+                {validationURL: 'https://apple-pay-gateway-cert.apple.com/paymentservices/startSession'}
+            );
+        } else {
+            this.completeMerchantValidation();
+        }
     }
 
     completeMerchantValidation(merchantSession) {

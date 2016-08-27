@@ -4,6 +4,7 @@ pairs:
   # <initials>: <Firstname> <Lastname>[; <email-id>]
   gt: Glen Tregoning; glen.tregoning
   jn: Julia Nguyen; julia.nguyen
+  dh: Derek Hsu; derek
 email:
   prefix: pair
   domain: indiegogo.com
